@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Total Health</string>
+    <string name="water_icon">Water Icon</string>
+    <string name="food_icon">Food Icon\n</string>
+    <string name="total_water_intake_text">Water: 0 oz</string>
+    <string name="total_caloric_intake_text">Calories: 0 cals</string>
+    <string name="button_add_water">Add Water</string>
+    <string name="button_add_food">Add Food</string>
 </resources>
