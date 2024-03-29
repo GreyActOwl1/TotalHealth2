@@ -2,13 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id= "@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <!-- Top Row LinearLayout for Totals -->
     <LinearLayout
-        android:id="@+id/totalsButtonRow"
+        android:id="@+id/totals_display_row"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -16,8 +17,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
+<!--TODO: Resize Icons-->
         <ImageView
+            android:id="@+id/water_intake_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:contentDescription="@string/water_icon"
@@ -26,6 +28,7 @@
             />
 
         <TextView
+            android:id="@+id/total_water_intake_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -35,6 +38,7 @@
             tools:text="Water: 24 oz" />
 
         <ImageView
+            android:id="@+id/caloric_intake_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:contentDescription="@string/food_icon"
@@ -42,6 +46,7 @@
             tools:srcCompat="@drawable/ic_meal" />
 
         <TextView
+            android:id="@+id/total_caloric_intake_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -55,19 +60,19 @@
 
     <!-- RecyclerView for Food Items -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvFoodItems"
+        android:id="@+id/recycler_view_food_items"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@id/AddInfoButtonRow"
+        app:layout_constraintBottom_toTopOf="@id/add_entry_button_row"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/totalsButtonRow"
+        app:layout_constraintTop_toBottomOf="@id/totals_display_row"
         tools:listitem="@layout/food_item" />
 
     <!-- Bottom Row LinearLayout for Buttons -->
     <LinearLayout
-        android:id="@+id/AddInfoButtonRow"
+        android:id="@+id/add_entry_button_row"
         style="?android:attr/buttonBarStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -78,7 +83,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/btnAddWater"
+            android:id="@+id/button_add_water"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -87,7 +92,7 @@
             android:text="@string/button_add_water" />
 
         <Button
-            android:id="@+id/btnAddFood"
+            android:id="@+id/button_add_food"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

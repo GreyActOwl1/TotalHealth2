@@ -7,10 +7,9 @@
     android:paddingHorizontal="50dp"
     android:paddingVertical="16dp">
 
-
     <!-- TextView for the Food Item Name -->
     <TextView
-        android:id="@+id/foodItemNameTextView"
+        android:id="@+id/food_item_name_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -19,7 +18,7 @@
 
     <!-- TextView for the Calories of the Food Item -->
     <TextView
-        android:id="@+id/foodItemCaloriesTextView"
+        android:id="@+id/food_item_calories_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
