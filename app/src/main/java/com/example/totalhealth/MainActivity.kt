@@ -1,6 +1,5 @@
 package com.example.totalhealth
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -23,10 +22,10 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val foodEntriesRecyclerView = findViewById<RecyclerView>(R.id.recycler_view_food_items)
-        val foodEntries = FoodEntry.getItems()
-        foodEntriesRecyclerView.apply {
-            adapter = FoodEntriesAdapter(foodEntries)
+        val foodItemsRecyclerView = findViewById<RecyclerView>(R.id.recycler_view_food_items)
+        val foodItems = FoodItem.getItems()
+        foodItemsRecyclerView.apply {
+            adapter = FoodItemsAdapter(foodItems)
             layoutManager = LinearLayoutManager(this@MainActivity)
             addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
         }
@@ -36,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         addFoodEntryButton.setOnClickListener {
             Toast.makeText(this, "Add food entry functionality", Toast.LENGTH_SHORT).show()
 //            TODO("Add food entry functionality")
-//            val intent = Intent(this, AddFoodEntryActivity::class.java)
+//            val intent = Intent(this, AddFoodItemActivity::class.java)
 //            startActivity(intent)
         }
 
