@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
             android:layout_weight="1"
-            android:text="@string/button_add_water" />
+            android:text="@string/button_add_water_label" />
 
         <Button
             android:id="@+id/button_add_food"
@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
             android:layout_weight="1"
-            android:text="@string/button_add_food" />
+            android:text="@string/button_add_food_label" />
 
     </LinearLayout>
 
