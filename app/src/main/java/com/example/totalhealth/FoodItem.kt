@@ -1,13 +1,24 @@
 package com.example.totalhealth
 
-class FoodItem(val name: String, val calories: Int = 0){
-    companion object{
+class FoodItem(val name: String, val calories: Int = 0) {
+    companion object {
         val foodNames = listOf(
-            "Apple","Banana","Bread","Milk", "Eggs"
+            "Apple", "Banana", "Bread", "Milk", "Eggs"
         )
-        val foodCalories = listOf(50,100, 120, 150, 101)
+        val foodCalories = listOf(50, 100, 120, 150, 101)
+        val foodItems = mutableListOf<FoodItem>()
 
-        fun getItems(): List<FoodItem> = foodNames.zip(foodCalories).map { FoodItem(it.first, it.second) }
+        fun getItems(): MutableList<FoodItem> {
+            // Check if foodItems is empty to avoid adding the same items multiple times
+            if (foodItems.isEmpty()) {
+                foodItems.addAll(foodNames.zip(foodCalories).map { FoodItem(it.first, it.second) })
+            }
+            return foodItems
+        }
+
+        fun getTotalCalories(): Int = getItems().sumOf { it.calories }
+
+
     }
 }
 

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    tools:context=".AddFoodItemActivity">
+
+    <!-- EditText for Food Name -->
+    <EditText
+        android:id="@+id/food_name_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/food_name_hint"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:inputType="text"
+        tools:text="Apple" />
+
+    <!-- EditText for Calories -->
+    <EditText
+        android:id="@+id/calories_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/calories_hint"
+        app:layout_constraintTop_toBottomOf="@id/food_name_edit_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:inputType="number"
+        tools:text="95" />
+
+    <!-- Button to Submit New Food Item -->
+    <Button
+        android:id="@+id/submit_food_item_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit"
+        app:layout_constraintTop_toBottomOf="@id/calories_edit_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

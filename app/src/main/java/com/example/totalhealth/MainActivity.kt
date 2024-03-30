@@ -1,7 +1,9 @@
 package com.example.totalhealth
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -12,8 +14,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var foodItemsRecyclerView: RecyclerView
+    private lateinit var totalCaloriesTextView: TextView
+    private lateinit var totalWaterTextView: TextView
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -21,35 +30,40 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        totalCaloriesTextView = findViewById(R.id.total_caloric_intake_text)
+        totalWaterTextView = findViewById(R.id.total_water_intake_text)
+        totalCaloriesTextView.text = getString(R.string.calories, FoodItem.getTotalCalories())
+        totalWaterTextView.text = getString(R.string.water, totalWaterIntake)
 
-        val foodItemsRecyclerView = findViewById<RecyclerView>(R.id.recycler_view_food_items)
-        val foodItems = FoodItem.getItems()
-        foodItemsRecyclerView.apply {
+
+        foodItemsRecyclerView = findViewById<RecyclerView>(R.id.recycler_view_food_items).apply {
             adapter = FoodItemsAdapter(foodItems)
             layoutManager = LinearLayoutManager(this@MainActivity)
             addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
         }
 
-        val addFoodEntryButton = findViewById<Button>(R.id.button_add_food)
-
-        addFoodEntryButton.setOnClickListener {
-            Toast.makeText(this, "Add food entry functionality", Toast.LENGTH_SHORT).show()
-//            TODO("Add food entry functionality")
-//            val intent = Intent(this, AddFoodItemActivity::class.java)
-//            startActivity(intent)
+        findViewById<Button>(R.id.button_add_food).setOnClickListener {
+            startActivity(Intent(this, AddFoodItemActivity::class.java))
         }
 
-        val addWaterEntryButton = findViewById<Button>(R.id.button_add_water)
-
-        addWaterEntryButton.setOnClickListener {
-            Toast.makeText(this, "Add water entry functionality", Toast.LENGTH_SHORT).show()
-//            TODO("Add water entry functionality")
-//            val intent = Intent(this, AddWaterEntryActivity::class.java)
-//            startActivity(intent)
+        findViewById<Button>(R.id.button_add_water).setOnClickListener {
+//            Toast.makeText(this, "Add water entry functionality", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, AddWaterEntryActivity::class.java))
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        foodItemsRecyclerView.adapter?.notifyItemRangeChanged(0, foodItems.size)
+        totalCaloriesTextView.text = getString(R.string.calories, FoodItem.getTotalCalories())
+        totalWaterTextView.text = getString(R.string.water, totalWaterIntake)
 
 
+    }
 
-
+    companion object {
+//TODO: Replace with a database
+        var foodItems: MutableList<FoodItem> = FoodItem.getItems()
+        var totalWaterIntake : Int =0
     }
 }

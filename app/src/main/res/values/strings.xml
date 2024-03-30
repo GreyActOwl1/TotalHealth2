@@ -1,9 +1,26 @@
 <resources>
     <string name="app_name">Total Health</string>
+
+    <!--Icon Strings -->
     <string name="water_icon">Water Icon</string>
-    <string name="food_icon">Food Icon\n</string>
-    <string name="total_water_intake_text">Water: 0 oz</string>
-    <string name="total_caloric_intake_text">Calories: 0 cals</string>
+    <string name="food_icon">Food Icon</string>
+
+    <!-- Totals  Strings -->
+    <string name="total_water_intake_text">Water:</string>
+    <string name="total_caloric_intake_text">Calories:</string>
+
+    <!-- Button Strings -->
     <string name="button_add_water_label">Add Water</string>
     <string name="button_add_food_label">Add Food</string>
+
+    <!-- Strings for adding a new food item -->
+    <string name="food_name_hint">Enter food name</string>
+    <string name="calories_hint">Enter calories (kcal)</string>
+    <string name="submit">Submit</string>
+
+    <!-- Strings for adding a new water item -->
+    <string name="hint_water_amount_oz">Enter water amount (oz)</string>
+    <string name="water">Water: %1$d oz</string>
+    <string name="calories">Calories: %1$d kcal</string>
+
 </resources>
