@@ -21,7 +21,7 @@ class AddFoodItemActivity : AppCompatActivity() {
             val foodCalories = foodCaloriesEditText.text.toString().toInt()
             val foodItem = FoodItem(foodName, foodCalories)
             MainActivity.foodItems.add(foodItem)
-            // TODO:Add food item to database
+            // TODO: Add food item to database
             finish()
         }
 
