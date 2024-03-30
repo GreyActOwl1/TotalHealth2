@@ -20,8 +20,8 @@
 <!--TODO: Resize Icons-->
         <ImageView
             android:id="@+id/water_intake_icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:contentDescription="@string/water_icon"
             android:src="@drawable/ic_water"
             tools:srcCompat="@drawable/ic_water"
@@ -39,8 +39,8 @@
 
         <ImageView
             android:id="@+id/caloric_intake_icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:contentDescription="@string/food_icon"
             android:src="@drawable/ic_meal"
             tools:srcCompat="@drawable/ic_meal" />
