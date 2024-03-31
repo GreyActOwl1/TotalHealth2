@@ -2,6 +2,7 @@ package com.example.totalhealth
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -12,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -37,9 +39,14 @@ class MainActivity : AppCompatActivity() {
         totalCaloriesTextView.text = getString(R.string.calories, FoodItem.getTotalCalories())
         totalWaterTextView.text = getString(R.string.water, totalWaterIntake)
 
+        foodItems = mutableListOf()
+
         lifecycleScope.launch {
             (application as HealthApplication).db.foodItemDao().getAll().collect { items ->
-                foodItems = items.toMutableList()
+                foodItems.addAll(items)
+                foodItemsRecyclerView.adapter?.notifyItemRangeChanged(0, foodItems.size)
+                Log.d("MainActivity", "onCreate: ran")
+
             }
         }
 
@@ -62,9 +69,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        foodItemsRecyclerView.adapter?.notifyItemRangeChanged(0, foodItems.size)
+        foodItemsRecyclerView.adapter?.notifyItemInserted(foodItems.size - 1)
         totalCaloriesTextView.text = getString(R.string.calories, FoodItem.getTotalCalories())
         totalWaterTextView.text = getString(R.string.water, totalWaterIntake)
+        Log.d("MainActivity", "onResume: ran")
 
 
     }
