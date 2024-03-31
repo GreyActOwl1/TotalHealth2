@@ -31,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         setupUI()
         updateDisplays()
         addButtonListeners()
+//        TODO:Highlight the last entry on return to main activity
+
     }
 
     private fun setupUI() {
