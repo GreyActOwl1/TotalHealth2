@@ -40,6 +40,8 @@ class MainActivity : AppCompatActivity() {
             view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        //add action bar
+        setSupportActionBar(findViewById(R.id.toolbar))
 
         totalCaloriesTextView = findViewById(R.id.total_caloric_intake_text)
         totalWaterTextView = findViewById(R.id.total_water_intake_text)
