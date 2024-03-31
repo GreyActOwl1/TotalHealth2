@@ -11,7 +11,7 @@ import java.time.LocalDateTime
 interface WaterIntakeEventDao {
     // Insert a new water intake event
     @Insert
-    suspend fun insert(event: WaterIntakeEvent)
+    fun insert(event: WaterIntakeEvent)
 
     // Get all water intake events
     @Query("SELECT * FROM water_intake_events")
@@ -23,5 +23,5 @@ interface WaterIntakeEventDao {
 
     // Optional: Delete all events (for example, to reset the database)
     @Query("DELETE FROM water_intake_events")
-    suspend fun deleteAll()
+    fun deleteAll()
 }
