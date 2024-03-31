@@ -7,6 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+<!-- Action bar-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#43A047"
+        app:titleTextColor="@android:color/white"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:title="@string/app_name"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+
+
+
     <!-- Top Row LinearLayout for Totals -->
     <LinearLayout
         android:id="@+id/totals_display_row"
@@ -14,9 +30,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
+        android:background="#9CAEAD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 <!--TODO: Resize Icons-->
         <ImageView
             android:id="@+id/water_intake_icon"
@@ -39,8 +56,8 @@
 
         <ImageView
             android:id="@+id/caloric_intake_icon"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:contentDescription="@string/food_icon"
             android:src="@drawable/ic_meal"
             tools:srcCompat="@drawable/ic_meal" />
