@@ -32,7 +32,6 @@ class AddFoodItemActivity : AppCompatActivity() {
 
 
 //            MainActivity.foodItems.add(foodItem)
-            // TODO: Add food item to database
             finish()
         }
 

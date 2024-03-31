@@ -39,4 +39,8 @@ interface FoodItemDao {
     // Get entry
     @Query("SELECT * FROM food_item_table WHERE id = :id")
     fun getEntry(id: Long): Flow<FoodItemEntity>
+
+    //Get total calories
+    @Query("SELECT SUM(foodCalories) FROM food_item_table")
+    fun getTotalCalories(): Flow<Int?>
 }

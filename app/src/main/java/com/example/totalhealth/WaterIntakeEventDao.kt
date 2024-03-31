@@ -21,6 +21,10 @@ interface WaterIntakeEventDao {
     @Query("SELECT SUM(amount) FROM water_intake_events WHERE timestamp BETWEEN :startOfDay AND :endOfDay")
     fun getTotalIntakeForDay(startOfDay: LocalDateTime, endOfDay: LocalDateTime): Flow<Int?>
 
+    // Get total water intake for all time
+    @Query("SELECT SUM(amount) FROM water_intake_events")
+    fun getTotalIntake(): Flow<Int?>
+
     // Optional: Delete all events (for example, to reset the database)
     @Query("DELETE FROM water_intake_events")
     fun deleteAll()

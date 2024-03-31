@@ -19,9 +19,14 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private lateinit var foodItemsRecyclerView: RecyclerView
+//    private lateinit var foodItemsAdapter: FoodItemsAdapter
     private lateinit var totalCaloriesTextView: TextView
     private lateinit var totalWaterTextView: TextView
     private lateinit var foodItems: MutableList<FoodItemEntity>
+    private var totalWaterIntake: Int = 0
+    private var totalCalories: Int = 0
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,28 +39,58 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         totalCaloriesTextView = findViewById(R.id.total_caloric_intake_text)
         totalWaterTextView = findViewById(R.id.total_water_intake_text)
-        totalCaloriesTextView.text = getString(R.string.calories, FoodItem.getTotalCalories())
+        totalCaloriesTextView.text = getString(R.string.calories, totalCalories)
         totalWaterTextView.text = getString(R.string.water, totalWaterIntake)
 
         foodItems = mutableListOf()
 
-        lifecycleScope.launch {
-            (application as HealthApplication).db.foodItemDao().getAll().collect { items ->
-                foodItems.addAll(items)
-                foodItemsRecyclerView.adapter?.notifyItemRangeChanged(0, foodItems.size)
-                Log.d("MainActivity", "onCreate: ran")
 
-            }
-        }
 
 
         foodItemsRecyclerView = findViewById<RecyclerView>(R.id.recycler_view_food_items).apply {
             adapter = FoodItemsAdapter(foodItems)
             layoutManager = LinearLayoutManager(this@MainActivity)
-            addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
+            addItemDecoration(
+                DividerItemDecoration(
+                    this@MainActivity,
+                    DividerItemDecoration.VERTICAL
+                )
+            )
         }
+
+        lifecycleScope.launch() {
+            // Get and display all food items from database
+            (application as HealthApplication).db.foodItemDao().getAll().collect { items ->
+                foodItems.clear()
+                foodItems.addAll(items)
+                foodItemsRecyclerView.adapter?.notifyItemRangeChanged(0, foodItems.size)
+                Log.d("MainActivity", "Food Displays Updated")
+
+            }
+        }
+         lifecycleScope.launch {
+             //Update total calories intake
+             (application as HealthApplication).db.foodItemDao().getTotalCalories().collect {
+                 totalCalories = it ?: 0
+                 totalCaloriesTextView.text = getString(R.string.calories, totalCalories)
+                 Log.d("MainActivity", "Total Calories Updated${totalCalories}")
+             }
+         }
+lifecycleScope.launch {(application as HealthApplication).db.waterIntakeEventDao().getTotalIntake().collect {
+    totalWaterIntake = it ?: 0
+    totalWaterTextView.text = getString(R.string.water, totalWaterIntake)
+    Log.d("MainActivity", "Total Water Intake Updated${totalWaterIntake}")
+}}
+            //Update total water intake
+
+
+
+
+
+
 
         findViewById<Button>(R.id.button_add_food).setOnClickListener {
             startActivity(Intent(this, AddFoodItemActivity::class.java))
@@ -67,19 +102,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        foodItemsRecyclerView.adapter?.notifyItemInserted(foodItems.size - 1)
-        totalCaloriesTextView.text = getString(R.string.calories, FoodItem.getTotalCalories())
-        totalWaterTextView.text = getString(R.string.water, totalWaterIntake)
-        Log.d("MainActivity", "onResume: ran")
 
-
-    }
-
-    companion object {
-//TODO: Replace with a database
-//        var foodItems: MutableList<FoodItem> = FoodItem.getItems()
-        var totalWaterIntake : Int =0
-    }
 }
