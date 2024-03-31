@@ -5,6 +5,9 @@ import android.widget.Button
 import android.widget.EditText
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 
 class AddFoodItemActivity : AppCompatActivity() {
 
@@ -18,20 +21,28 @@ class AddFoodItemActivity : AppCompatActivity() {
 
         submitButton.setOnClickListener {
             val foodName = foodNameEditText.text.toString()
-            val foodCalories = foodCaloriesEditText.text.toString().toInt()
-            val foodItem = FoodItem(foodName, foodCalories)
-            MainActivity.foodItems.add(foodItem)
+            val foodCalories = foodCaloriesEditText.text.toString().toIntOrNull() ?: 0
+//            val foodItem = FoodItem(foodName, foodCalories)
+            val foodItemEntity = FoodItemEntity(name = foodName, calories = foodCalories)
+
+
+            // add to database
+            val db = (application as HealthApplication).db
+            insertFoodItem(db.foodItemDao(), foodItemEntity)
+
+
+//            MainActivity.foodItems.add(foodItem)
             // TODO: Add food item to database
             finish()
         }
 
+    }
 
-
-
-
-
-
-
+    private fun insertFoodItem(dao: FoodItemDao, foodItemEntity: FoodItemEntity) {
+        // Launching a new coroutine to insert the item asynchronously
+        lifecycleScope.launch(IO) {
+            dao.insertAll(listOf(foodItemEntity))
+        }
     }
 
 }

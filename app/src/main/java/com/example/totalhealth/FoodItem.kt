@@ -1,6 +1,6 @@
 package com.example.totalhealth
 
-class FoodItem(val name: String, val calories: Int = 0) {
+class FoodItem(var name: String, var calories: Int = 0) {
     companion object {
         val foodNames = listOf(
             "Apple", "Banana", "Bread", "Milk", "Eggs"

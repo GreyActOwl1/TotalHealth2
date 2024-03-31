@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class FoodItemsAdapter (private val foodItems: List<FoodItem>) :
+class FoodItemsAdapter(private val foodItems: MutableList<FoodItemEntity>) :
     RecyclerView.Adapter<FoodItemsAdapter.ViewHolder>(){
    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val foodItemNameTextView: TextView = itemView.findViewById(R.id.food_item_name_text_view)
