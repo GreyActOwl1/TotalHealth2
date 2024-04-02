@@ -1,6 +1,7 @@
 package com.example.totalhealth
 
 class FoodItem(var name: String, var calories: Int = 0) {
+    //TODO: Refactor FoodItem class
     companion object {
         val foodNames = listOf(
             "Apple", "Banana", "Bread", "Milk", "Eggs"
