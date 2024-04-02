@@ -2,7 +2,6 @@ package com.example.totalhealth
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -13,7 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -31,15 +29,26 @@ class MainActivity : AppCompatActivity() {
         setupUI()
         updateDisplays()
         addButtonListeners()
-//        TODO:Highlight the last entry on return to main activity
+        //TODO: Add bottom navigation Log, totals/dashboard
+        //TODO:Refactor to use fragments
+        //TODO: Add Dashboard fragment including: min, max and totals for calories and water
+//        TODO:(OPTIONAL) Highlight the last entry on return to main activity
+        //TODO: Add graphs
+        //TODO: Add Edit and Delete on long press for food items and associated activity
 
     }
 
     private fun setupUI() {
         enableEdgeToEdge()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { view, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            val systemBars =
+                insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(
+                systemBars.left,
+                systemBars.top,
+                systemBars.right,
+                systemBars.bottom
+            )
             insets
         }
         //add action bar
@@ -50,16 +59,17 @@ class MainActivity : AppCompatActivity() {
         totalCaloriesTextView.text = getString(R.string.calories, totalCalories)
         totalWaterTextView.text = getString(R.string.water, totalWaterIntake)
 
-        foodItemsRecyclerView = findViewById<RecyclerView>(R.id.recycler_view_food_items).apply {
-            adapter = FoodItemsAdapter(foodItems)
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            addItemDecoration(
-                DividerItemDecoration(
-                    this@MainActivity,
-                    DividerItemDecoration.VERTICAL
+        foodItemsRecyclerView =
+            findViewById<RecyclerView>(R.id.recycler_view_food_items).apply {
+                adapter = FoodItemsAdapter(foodItems)
+                layoutManager = LinearLayoutManager(this@MainActivity)
+                addItemDecoration(
+                    DividerItemDecoration(
+                        this@MainActivity,
+                        DividerItemDecoration.VERTICAL
+                    )
                 )
-            )
-        }
+            }
     }
 
 
@@ -70,22 +80,28 @@ class MainActivity : AppCompatActivity() {
                 db.foodItemDao().getAll().collect { items ->
                     foodItems.clear()
                     foodItems.addAll(items)
-                    foodItemsRecyclerView.adapter?.notifyItemRangeChanged(0, items.size)
+                    foodItemsRecyclerView.adapter?.notifyItemRangeChanged(
+                        0,
+                        items.size
+                    )
                 }
             }
-            launch {   db.foodItemDao().getTotalCalories().collect {
-                totalCalories = it ?: 0
-                totalCaloriesTextView.text = getString(R.string.calories, totalCalories)
-            }}
-            launch {  db.waterIntakeEventDao().getTotalIntake().collect {
-                totalWaterIntake = it ?: 0
-                totalWaterTextView.text = getString(R.string.water, totalWaterIntake)
-            } }
+            launch {
+                db.foodItemDao().getTotalCalories().collect {
+                    totalCalories = it ?: 0
+                    totalCaloriesTextView.text =
+                        getString(R.string.calories, totalCalories)
+                }
+            }
+            launch {
+                db.waterIntakeEventDao().getTotalIntake().collect {
+                    totalWaterIntake = it ?: 0
+                    totalWaterTextView.text =
+                        getString(R.string.water, totalWaterIntake)
+                }
+            }
         }
     }
-
-
-
 
 
     private fun addButtonListeners() {
