@@ -13,10 +13,9 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-//    private lateinit var foodItemsRecyclerView: RecyclerView
+
     private lateinit var totalCaloriesTextView: TextView
     private lateinit var totalWaterTextView: TextView
-//    private val foodItems = mutableListOf<FoodItemEntity>()
     private var totalWaterIntake: Int = 0
     private var totalCalories: Int = 0
 
@@ -28,9 +27,10 @@ class MainActivity : AppCompatActivity() {
         setNavigationBar()
 
         //TODO: Add Dashboard fragment including: min, max and totals for calories and water
+        //TODO: Add graphs (Graph Fragment)
+        //TODO: Refactor to view binding
         //TODO: Refactor addFoodItem to fragment
         //TODO: Refactor addWaterEntry to fragment
-        //TODO: Add graphs (Graph Fragment)
 //        TODO:(OPTIONAL) Highlight the last entry on return to main activity
         //TODO: Add Edit and Delete on long press for food items and associated activity
 
@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.navigation_dashboard -> {
                     // Handle home navigation
+//                    replaceFragment(OverviewFragment())
                     Toast.makeText(
                         this, "Not Implemented Yet", Toast
                             .LENGTH_SHORT

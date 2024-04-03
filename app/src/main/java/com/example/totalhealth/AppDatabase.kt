@@ -59,6 +59,7 @@ abstract class AppDatabase : RoomDatabase() {
                 timestamp = LocalDateTime.of(2024, 3, 30, 13, 0),
                 amount = 50
             ),
+            //TODO: Add events for current day
         )
 
         private val roomDatabaseCallback = object : Callback() {
