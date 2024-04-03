@@ -22,5 +22,7 @@
     <string name="hint_water_amount_oz">Enter water amount (oz)</string>
     <string name="water">Water: %1$d oz</string>
     <string name="calories">Calories: %1$d kcal</string>
+    <string name="navigation_log">Log</string>
+    <string name="navigation_overview">Overview</string>
 
 </resources>

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -12,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         setupUI()
         updateDisplays()
         addButtonListeners()
-        //TODO: Add bottom navigation Log, totals/dashboard
+        setNavigationBar()
         //TODO:Refactor to use fragments
         //TODO: Add Dashboard fragment including: min, max and totals for calories and water
 //        TODO:(OPTIONAL) Highlight the last entry on return to main activity
@@ -37,6 +39,30 @@ class MainActivity : AppCompatActivity() {
         //TODO: Add Edit and Delete on long press for food items and associated activity
 
     }
+
+    private fun setNavigationBar() {
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id
+            .bottom_navigation)
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_log -> {
+                    // Handle dashboard navigation
+                    Toast.makeText(this, "Here", Toast.LENGTH_SHORT)
+                        .show()
+                    true
+                }
+                R.id.navigation_dashboard ->  {
+                    // Handle home navigation
+                    Toast.makeText(this, "Not Implemented Yet", Toast
+                        .LENGTH_SHORT).show()
+                    true
+                }
+
+                else -> false
+            }
+            }
+    }
+
 
     private fun setupUI() {
         enableEdgeToEdge()
