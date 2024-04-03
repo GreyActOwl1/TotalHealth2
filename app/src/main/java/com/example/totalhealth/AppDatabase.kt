@@ -9,8 +9,12 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
 
-@Database(entities = [FoodItemEntity::class, WaterIntakeEvent::class], version = 1)
+@Database(
+    entities = [FoodItemEntity::class, WaterIntakeEvent::class],
+    version = 1
+)
 @TypeConverters(LocalDateTimeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun foodItemDao(): FoodItemDao
@@ -34,11 +38,36 @@ abstract class AppDatabase : RoomDatabase() {
             FoodItemEntity(name = "Eggs", calories = 100),
         )
 
+        val sampleWaterIntakeEvents = listOf(
+            WaterIntakeEvent(
+                timestamp = LocalDateTime.of(2024, 3, 30, 12, 0),
+                amount = 10
+            ),
+            WaterIntakeEvent(
+                timestamp = LocalDateTime.of(2024, 3, 30, 12, 15),
+                amount = 20
+            ),
+            WaterIntakeEvent(
+                timestamp = LocalDateTime.of(2024, 3, 30, 12, 30),
+                amount = 30
+            ),
+            WaterIntakeEvent(
+                timestamp = LocalDateTime.of(2024, 3, 30, 12, 45),
+                amount = 40
+            ),
+            WaterIntakeEvent(
+                timestamp = LocalDateTime.of(2024, 3, 30, 13, 0),
+                amount = 50
+            ),
+        )
+
         private val roomDatabaseCallback = object : Callback() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
                 CoroutineScope(IO).launch {
                     INSTANCE?.foodItemDao()?.insertAll(sampleFoodItems)
+                    INSTANCE?.waterIntakeEventDao()
+                        ?.insertAll(sampleWaterIntakeEvents)
                 }
             }
         }
