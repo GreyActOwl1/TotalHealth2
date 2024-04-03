@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FoodItemDao {
+    //TODO: Refactor for live updates
     // Get all entries
     @Query("SELECT * FROM food_item_table")
     fun getAll(): Flow<List<FoodItemEntity>>
@@ -43,4 +44,13 @@ interface FoodItemDao {
     //Get total calories
     @Query("SELECT SUM(foodCalories) FROM food_item_table")
     fun getTotalCalories(): Flow<Int?>
+    // Get average calories
+    @Query("SELECT AVG(foodCalories) FROM food_item_table")
+    fun getAverageCalories(): Double
+    // Get minimum calories
+    @Query("SELECT MIN(foodCalories) FROM food_item_table")
+    fun getMinCalories(): Int
+    // Get maximum calories
+    @Query("SELECT MAX(foodCalories) FROM food_item_table")
+    fun getMaxCalories(): Int
 }
