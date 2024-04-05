@@ -89,6 +89,13 @@ class OverviewFragment : Fragment() {
                     .getDailyAverageWaterIntake().firstOrNull() ?: 0
             }.await()
 
+            //get food stats
+//            val minCalories = async {
+//                db.foodItemDao()
+//                    .getMinCalories().firstOrNull() ?: 0
+//            }.await()
+
+
             //update display on main thread
             withContext(Dispatchers.Main) {
                 waterIntakeMinMaxTextview.text = getString(
