@@ -89,11 +89,23 @@ class OverviewFragment : Fragment() {
                     .getDailyAverageWaterIntake().firstOrNull() ?: 0
             }.await()
 
+            //TODO: Get food stats
+
             //get food stats
-//            val minCalories = async {
-//                db.foodItemDao()
-//                    .getMinCalories().firstOrNull() ?: 0
-//            }.await()
+            val minCalories = async {
+                db.foodItemDao()
+                    .getMinCalories().firstOrNull() ?: 0
+            }.await()
+
+            val maxCalories = async {
+                db.foodItemDao()
+                    .getMaxCalories().firstOrNull() ?: 0
+            }.await()
+
+            val avgCalories = async {
+                db.foodItemDao()
+                    .getAverageCalories().firstOrNull() ?: 0
+            }.await()
 
 
             //update display on main thread
@@ -110,6 +122,14 @@ class OverviewFragment : Fragment() {
                     R.string
                         .average_daily_water_intake, dailyAvgWaterIntake
                 )
+                caloriesMinMaxTextview.text = getString(
+                    R.string
+                        .calories_min_max, minCalories, maxCalories
+                )
+                averageCaloriesTextview.text = getString(
+                    R.string.average_calories, avgCalories
+                )
+
 
             }
         }
