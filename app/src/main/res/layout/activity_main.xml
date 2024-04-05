@@ -20,9 +20,6 @@
         tools:title="@string/app_name"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-
-
-
     <!-- Top Row LinearLayout for Totals -->
     <LinearLayout
         android:id="@+id/totals_display_row"
@@ -34,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
-<!--TODO: Resize Icons-->
+
         <ImageView
             android:id="@+id/water_intake_icon"
             android:layout_width="30dp"
@@ -75,49 +72,28 @@
 
     </LinearLayout>
 
-    <!-- RecyclerView for Food Items -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_food_items"
+    <FrameLayout
+        android:id="@+id/food_list_frame"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@id/add_entry_button_row"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/totals_display_row"
-        tools:listitem="@layout/food_item" />
+    android:layout_height="0dp"
+    app:layout_constraintTop_toBottomOf="@id/totals_display_row"
+    app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Bottom Row LinearLayout for Buttons -->
-    <LinearLayout
-        android:id="@+id/add_entry_button_row"
-        style="?android:attr/buttonBarStyle"
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_navigation_menu" />
 
-        <Button
-            android:id="@+id/button_add_water"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:layout_weight="1"
-            android:text="@string/button_add_water_label" />
-
-        <Button
-            android:id="@+id/button_add_food"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:layout_weight="1"
-            android:text="@string/button_add_food_label" />
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

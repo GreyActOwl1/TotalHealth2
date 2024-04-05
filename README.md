@@ -2,26 +2,24 @@
 
 Submitted by: Adrian Eastmond
 
-**Total Health** is a health metrics app that allows users to track their dail calories and hydration.
+**Total Health** is a health metrics app that allows users to track their daily calories and hydration.
 
-Time spent: **7** hours spent in total
+Time spent: **8** hours spent in total
 
 ## Required Features
 
 The following **required** functionality is completed:
 
-- [x] **At least one health metric is tracked (based on user input)**
-  - Chosen metric(s): `Calories, Water Intake`
-- [x] **There is a "create entry" UI that prompts users to make their daily entry**
-- [x] **New entries are saved in a database and then updated in the RecyclerView**
-- [x] **On application restart, previously entered entries are preserved (i.e., are _persistent_)**
+- [x] **Use at least 2 Fragments**
+- [x] **Create a new dashboard fragment where users can see a summary of
+      their entered data**
+- [x] **Use one of the Navigation UI Views (BottomNavigation, Drawer Layout,
+      Top Bar) to move between the fragments**
 
 The following **optional** features are implemented:
 
-- [x] **Create a UI for tracking averages and trends in metrics**
-- [x] **Improve and customize the user interface through styling and coloring**
-- [x] **Implement orientation responsivity**
-- [ ] **Add a daily photo feature**
+- [ ] **Add a more advanced UI (e.g: Graphing) for tracking trends in metrics**
+- [ ] **Implement daily notifications to prompt users to fill in their data**
 
 The following **additional** features are implemented:
 
@@ -29,7 +27,15 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://i.imgur.com/6UAxBiR.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://i.imgur.com/ptCWhOm.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+### Previous Versions
+
+<details>
+<summary>1.0</summary>
+<br>
+<img src='https://i.imgur.com/ptCWhOm.gif' title='v1.0 Video Walkthrough' width='' alt='v1.0 Video Walkthrough' />
+</details>
 
 <!-- ![Video Walkthrough](https://i.imgur.com/6UAxBiR.gif) -->
 

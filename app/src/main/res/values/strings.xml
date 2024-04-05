@@ -22,5 +22,20 @@
     <string name="hint_water_amount_oz">Enter water amount (oz)</string>
     <string name="water">Water: %1$d oz</string>
     <string name="calories">Calories: %1$d kcal</string>
+    <string name="navigation_log">Log</string>
+    <string name="navigation_overview">Overview</string>
+
+
+    <!--- Strings for the overview page -->
+    <string name="calories_min_max">
+        Calories: Min: %1$d oz, Max: %2$d oz
+    </string>
+    <string name="average_calories">Average Calories: %1$d kcal</string>
+
+    <string name="water_intake_min_max">
+        Water: Min: %1$d oz, Max: %2$d oz
+    </string>
+    <string name="average_total_water_intake">Average per Entry: %1$d oz</string>
+    <string name="average_daily_water_intake">Average per Day: %1$d oz</string>
 
 </resources>

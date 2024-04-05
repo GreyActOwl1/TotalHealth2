@@ -43,4 +43,13 @@ interface FoodItemDao {
     //Get total calories
     @Query("SELECT SUM(foodCalories) FROM food_item_table")
     fun getTotalCalories(): Flow<Int?>
+    // Get average calories
+    @Query("SELECT AVG(foodCalories) FROM food_item_table")
+    fun getAverageCalories(): Flow<Int?>
+    // Get minimum calories
+    @Query("SELECT MIN(foodCalories) FROM food_item_table")
+    fun getMinCalories(): Flow<Int?>
+    // Get maximum calories
+    @Query("SELECT MAX(foodCalories) FROM food_item_table")
+    fun getMaxCalories(): Flow<Int?>
 }
