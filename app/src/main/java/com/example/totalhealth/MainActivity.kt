@@ -2,7 +2,6 @@ package com.example.totalhealth
 
 import android.os.Bundle
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -12,7 +11,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
-
 
     private lateinit var totalCaloriesTextView: TextView
     private lateinit var totalWaterTextView: TextView
@@ -26,12 +24,11 @@ class MainActivity : AppCompatActivity() {
         updateTotalsDisplays()
         setNavigationBar()
 
-        //TODO: Add Dashboard fragment including: min, max and totals for calories and water
         //TODO: Add graphs (Graph Fragment)
         //TODO: Refactor to view binding
         //TODO: Refactor addFoodItem to fragment
         //TODO: Refactor addWaterEntry to fragment
-//        TODO:(OPTIONAL) Highlight the last entry on return to main activity
+        //TODO:(OPTIONAL) Highlight entry on submit & return to main activity
         //TODO: Add Edit and Delete on long press for food items and associated activity
 
     }
@@ -49,12 +46,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.navigation_dashboard -> {
-                    // Handle home navigation
                     replaceFragment(OverviewFragment())
-//                    Toast.makeText(
-//                        this, "Not Implemented Yet", Toast
-//                            .LENGTH_SHORT
-//                    ).show()
                     true
                 }
 

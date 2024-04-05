@@ -89,8 +89,6 @@ class OverviewFragment : Fragment() {
                     .getDailyAverageWaterIntake().firstOrNull() ?: 0
             }.await()
 
-            //TODO: Get food stats
-
             //get food stats
             val minCalories = async {
                 db.foodItemDao()
@@ -106,7 +104,6 @@ class OverviewFragment : Fragment() {
                 db.foodItemDao()
                     .getAverageCalories().firstOrNull() ?: 0
             }.await()
-
 
             //update display on main thread
             withContext(Dispatchers.Main) {
@@ -129,8 +126,6 @@ class OverviewFragment : Fragment() {
                 averageCaloriesTextview.text = getString(
                     R.string.average_calories, avgCalories
                 )
-
-
             }
         }
 
