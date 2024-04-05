@@ -46,9 +46,17 @@ interface WaterIntakeEventDao {
     @Query("SELECT SUM(amount) FROM water_intake_events")
     fun getTotalIntake(): Flow<Int?>
 
-    /** * Queries the database for average water intake  for all time*/
+    /** * Queries the database for average water intake  for current day*/
+    @Query("SELECT AVG(amount) FROM water_intake_events" +
+            " WHERE timestamp BETWEEN :startOfDay AND :endOfDay")
+    fun getDailyAverageWaterIntake(
+        startOfDay: LocalDateTime = LocalDateTime.now().with(LocalTime.MIN),
+        endOfDay: LocalDateTime = LocalDateTime.now().with(LocalTime.MAX)
+    ): Flow<Int?>
+
+    /** * Queries the database for the total water intake  for all time*/
     @Query("SELECT AVG(amount) FROM water_intake_events")
-    fun getAverageWaterIntake(): Flow<Int?>
+    fun getTotalAverageWaterIntake(): Flow<Int?>
 
 
     /** * Clear all water intake events*/

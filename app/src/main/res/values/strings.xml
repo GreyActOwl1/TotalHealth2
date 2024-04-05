@@ -27,17 +27,15 @@
 
 
     <!--- Strings for the overview page -->
-    <string name="average_daily_water_intake">TODO\n</string>
     <string name="calories_min_max">
         Calories: Min: %1$d oz, Max: %2$d oz
     </string>
     <string name="average_calories">Average Calories: %1$.2f kcal</string>
+
     <string name="water_intake_min_max">
-        Water: Min: %1$s oz, Max: %2$s oz
+        Water: Min: %1$d oz, Max: %2$d oz
     </string>
-    <string name="average_water_intake">Average per Entry: %1$d oz</string>
-    <string name="daily_average_water_intake">
-        Average per Day: %1$s oz
-    </string>
+    <string name="average_total_water_intake">Average per Entry: %1$d oz</string>
+    <string name="average_daily_water_intake">Average per Day: %1$d oz</string>
 
 </resources>

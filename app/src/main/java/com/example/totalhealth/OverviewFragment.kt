@@ -8,8 +8,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * A simple [Fragment] subclass.
@@ -18,13 +21,12 @@ import kotlinx.coroutines.launch
  */
 
 class OverviewFragment : Fragment() {
-    //TODO: Refactor textviews
-    private lateinit var calories_min_max_textview: TextView
-    private lateinit var average_calories_textview: TextView
-    private lateinit var average_water_intake_textview: TextView
-    private lateinit var water_intake_min_max_textview: TextView
-    private lateinit var daily_average_water_intake_textview: TextView
 
+    private lateinit var caloriesMinMaxTextview: TextView
+    private lateinit var averageCaloriesTextview: TextView
+    private lateinit var averageWaterIntakeTextview: TextView
+    private lateinit var waterIntakeMinMaxTextview: TextView
+    private lateinit var dailyAverageWaterIntakeTextview: TextView
 
 
     override fun onCreateView(
@@ -35,23 +37,23 @@ class OverviewFragment : Fragment() {
         return inflater.inflate(
             R.layout.fragment_overview, container, false
         ).also { view ->
-            calories_min_max_textview = view.findViewById<TextView>(
+            caloriesMinMaxTextview = view.findViewById<TextView>(
                 R.id
                     .calories_min_max_textview
             )
-            average_calories_textview = view.findViewById<TextView>(
+            averageCaloriesTextview = view.findViewById<TextView>(
                 R.id
                     .average_calories_textview
             )
-            average_water_intake_textview = view.findViewById<TextView>(
+            averageWaterIntakeTextview = view.findViewById<TextView>(
                 R.id
                     .average_water_intake_textview
             )
-            water_intake_min_max_textview = view.findViewById<TextView>(
+            waterIntakeMinMaxTextview = view.findViewById<TextView>(
                 R.id
                     .water_intake_min_max_textview
             )
-            daily_average_water_intake_textview = view.findViewById<TextView>(
+            dailyAverageWaterIntakeTextview = view.findViewById<TextView>(
                 R.id.daily_average_water_intake_textview
             )
 
@@ -64,29 +66,47 @@ class OverviewFragment : Fragment() {
         fetchAndUpdateStats()
     }
 
+
     private fun fetchAndUpdateStats() {
-        val db by lazy {
-            (requireActivity().application as HealthApplication).db
+        val db = (requireActivity().application as HealthApplication).db
 
+        // get water stats
+        lifecycleScope.launch {
+            val minWaterIntake = async {
+                db.waterIntakeEventDao()
+                    .getMinWaterIntake().firstOrNull() ?: 0
+            }.await()
+            val maxWaterIntake = async {
+                db.waterIntakeEventDao()
+                    .getMaxWaterIntake().firstOrNull() ?: 0
+            }.await()
+            val avgWaterIntake = async {
+                db.waterIntakeEventDao()
+                    .getTotalAverageWaterIntake().firstOrNull() ?: 0
+            }.await()
+            val dailyAvgWaterIntake = async {
+                db.waterIntakeEventDao()
+                    .getDailyAverageWaterIntake().firstOrNull() ?: 0
+            }.await()
+
+            //update display on main thread
+            withContext(Dispatchers.Main) {
+                waterIntakeMinMaxTextview.text = getString(
+                    R.string
+                        .water_intake_min_max, minWaterIntake, maxWaterIntake
+                )
+                averageWaterIntakeTextview.text = getString(
+                    R.string
+                        .average_total_water_intake, avgWaterIntake
+                )
+                dailyAverageWaterIntakeTextview.text = getString(
+                    R.string
+                        .average_daily_water_intake, dailyAvgWaterIntake
+                )
+
+            }
         }
-        var minCalories: Int
-        var maxCalories: Int
-        var avgCalories: Double
-        var minWaterIntake: Int
-        var maxWaterIntake: Int
-        var avgWaterIntake: Double
-        var dailyAvgWaterIntake: Int
 
-
-        lifecycleScope.launch(IO) {
-            // Fetch  and update calories stats
-            // Fetch and update water intake stats
-            Log.d("OverviewFragment", "fetchAndDisplayStats")
-           //TODO: NOT YET IMPLEMENTED
-
-
-
-        }
     }
 
 

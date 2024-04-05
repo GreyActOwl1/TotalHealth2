@@ -50,11 +50,11 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.navigation_dashboard -> {
                     // Handle home navigation
-//                    replaceFragment(OverviewFragment())
-                    Toast.makeText(
-                        this, "Not Implemented Yet", Toast
-                            .LENGTH_SHORT
-                    ).show()
+                    replaceFragment(OverviewFragment())
+//                    Toast.makeText(
+//                        this, "Not Implemented Yet", Toast
+//                            .LENGTH_SHORT
+//                    ).show()
                     true
                 }
 
