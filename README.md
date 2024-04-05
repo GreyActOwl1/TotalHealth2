@@ -10,11 +10,11 @@ Time spent: **8** hours spent in total
 
 The following **required** functionality is completed:
 
-- [X] **Use at least 2 Fragments**
-- [X] **Create a new dashboard fragment where users can see a summary of 
-  their entered data**
-- [X] **Use one of the Navigation UI Views (BottomNavigation, Drawer Layout, 
-  Top Bar) to move between the fragments**
+- [x] **Use at least 2 Fragments**
+- [x] **Create a new dashboard fragment where users can see a summary of
+      their entered data**
+- [x] **Use one of the Navigation UI Views (BottomNavigation, Drawer Layout,
+      Top Bar) to move between the fragments**
 
 The following **optional** features are implemented:
 
@@ -27,7 +27,15 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='TODO' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://i.imgur.com/ptCWhOm.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+### Previous Versions
+
+<details>
+<summary>1.0</summary>
+<br>
+<img src='https://i.imgur.com/ptCWhOm.gif' title='v1.0 Video Walkthrough' width='' alt='v1.0 Video Walkthrough' />
+</details>
 
 <!-- ![Video Walkthrough](https://i.imgur.com/6UAxBiR.gif) -->
 
