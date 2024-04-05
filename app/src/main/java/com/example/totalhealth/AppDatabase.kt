@@ -9,7 +9,9 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 
 @Database(
     entities = [FoodItemEntity::class, WaterIntakeEvent::class],
@@ -59,7 +61,18 @@ abstract class AppDatabase : RoomDatabase() {
                 timestamp = LocalDateTime.of(2024, 3, 30, 13, 0),
                 amount = 50
             ),
-            //TODO: Add events for current day
+            WaterIntakeEvent(
+                timestamp = LocalDateTime.now().with(LocalTime.MIN),
+                amount = 61
+            ),
+            WaterIntakeEvent(
+                timestamp = LocalDateTime.now().with(LocalTime.of(0,0,7)),
+                amount = 62
+            ),
+            WaterIntakeEvent(
+                timestamp = LocalDateTime.now().with(LocalTime.of(0,0,14)),
+                amount = 63
+            ),
         )
 
         private val roomDatabaseCallback = object : Callback() {
