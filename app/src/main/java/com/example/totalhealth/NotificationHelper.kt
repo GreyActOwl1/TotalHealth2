@@ -1,19 +1,37 @@
 package com.example.totalhealth
 
 import android.Manifest
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.graphics.drawable.IconCompat
 
 class NotificationHelper(private val context: Context) {
     fun showNotification(context: Context, title: String, content: String) {
+        val intent = Intent(context, AddFoodItemActivity::class.java)
+
+        val pendingIntent = PendingIntent.getActivity(
+            context,
+            0,
+            intent,
+            PendingIntent.FLAG_MUTABLE
+        )
+
+        val bubbleMetadata = NotificationCompat.BubbleMetadata.Builder()
+            .setIcon(IconCompat.createWithResource(context, R.drawable.ic_launcher_foreground))
+            .setIntent(pendingIntent).build()
+
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground) // Use appropriate icon
             .setContentTitle(title).setContentText(content)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(pendingIntent)
+            .setBubbleMetadata(bubbleMetadata)
 
         with(NotificationManagerCompat.from(context)) {
             if (!isNotificationPermissionGranted(context)) {
