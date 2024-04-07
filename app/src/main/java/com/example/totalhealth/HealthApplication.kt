@@ -19,7 +19,7 @@ class HealthApplication : Application() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = getString(R.string.channel_name)
             val descriptionText = getString(R.string.channel_description)
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val importance = NotificationManager.IMPORTANCE_HIGH
             val CHANNEL_ID = NotificationHelper.CHANNEL_ID
             val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
                 description = descriptionText

@@ -9,6 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
+import java.util.logging.Handler
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,14 +25,6 @@ class MainActivity : AppCompatActivity() {
         updateTotalsDisplays()
         setNavigationBar()
 
-        //FIXME: REMOVE THIS!!!
-
-        val notificationHelper = NotificationHelper(this)
-        notificationHelper.showNotification(
-            this, "Test Notification", "This " + "is a test notification"
-        )
-
-        // TODO: Add Daily Notifications
         // TODO: Add graphs (Graph Fragment)
         // TODO: Refactor to view binding
         // TODO: Add Nav Graph
@@ -40,6 +33,18 @@ class MainActivity : AppCompatActivity() {
         // TODO:(OPTIONAL) Highlight entry on submit & return to main activity
         // TODO: Add Edit and Delete on long press for food items and associated activity
 
+    }
+
+    private val notificationHelper by lazy { NotificationHelper(this) }
+    private val handler = android.os.Handler()
+
+    override fun onStop() {
+        super.onStop()
+        handler.postDelayed({
+            notificationHelper.showNotification(
+                this, "Daily Reminder", "Remember to log your food intake!"
+            )
+        }, 1000)
     }
 
     private fun setNavigationBar() {
