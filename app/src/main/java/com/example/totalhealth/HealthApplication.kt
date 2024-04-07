@@ -20,7 +20,7 @@ class HealthApplication : Application() {
             val name = getString(R.string.channel_name)
             val descriptionText = getString(R.string.channel_description)
             val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val CHANNEL_ID = "total_health_channel"
+            val CHANNEL_ID = NotificationHelper.CHANNEL_ID
             val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
                 description = descriptionText
             }

@@ -23,6 +23,13 @@ class MainActivity : AppCompatActivity() {
         setupUI()
         updateTotalsDisplays()
         setNavigationBar()
+
+        //FIXME: REMOVE THIS!!!
+
+        val notificationHelper = NotificationHelper(this)
+        notificationHelper.showNotification(this, "Test Notification", "This " +
+                "is a test notification")
+
         // TODO: Add Daily Notifications
         // TODO: Add graphs (Graph Fragment)
         // TODO: Refactor to view binding
