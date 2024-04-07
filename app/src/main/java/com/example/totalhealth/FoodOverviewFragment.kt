@@ -8,10 +8,10 @@ import android.view.ViewGroup
 
 /**
  * A simple [Fragment] subclass.
- * Use the [FoodFragment.newInstance] factory method to
+ * Use the [FoodOverviewFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FoodFragment : Fragment() {
+class FoodOverviewFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +24,7 @@ class FoodFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_food, container, false)
+        return inflater.inflate(R.layout.fragment_food_overview, container, false)
     }
 
     companion object {
@@ -35,8 +35,8 @@ class FoodFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(): FoodFragment {
-            return FoodFragment()
+        fun newInstance(): FoodOverviewFragment {
+            return FoodOverviewFragment()
         }
     }
 }
