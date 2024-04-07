@@ -11,7 +11,7 @@ class ViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
         return when (position) {
 //          TODO: Add additional fragments
             0 -> StatsFragment()
-            1 -> StatsFragment()
+            1 -> FoodFragment()
             else -> StatsFragment()
         }
     }
