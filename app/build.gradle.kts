@@ -42,6 +42,7 @@ dependencies {
 
     implementation(libs.androidx.room.common)
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.viewpager2)
     annotationProcessor(libs.androidx.room.compiler)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
