@@ -27,8 +27,9 @@ class MainActivity : AppCompatActivity() {
         //FIXME: REMOVE THIS!!!
 
         val notificationHelper = NotificationHelper(this)
-        notificationHelper.showNotification(this, "Test Notification", "This " +
-                "is a test notification")
+        notificationHelper.showNotification(
+            this, "Test Notification", "This " + "is a test notification"
+        )
 
         // TODO: Add Daily Notifications
         // TODO: Add graphs (Graph Fragment)
@@ -42,17 +43,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setNavigationBar() {
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val bottomNavigationView =
+            findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_log -> {
                     replaceFragment(FoodListFragment())
                     true
                 }
+
                 R.id.navigation_dashboard -> {
                     replaceFragment(OverviewFragment())
                     true
                 }
+
                 else -> false
             }
         }
@@ -61,9 +65,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupUI() {
         enableEdgeToEdge()
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { view, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) {
+        view, insets ->
+            val systemBars =
+                insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(
+                systemBars.left,
+                systemBars.top,
+                systemBars.right,
+                systemBars.bottom
+            )
             insets
         }
         // add action bar
@@ -83,14 +94,16 @@ class MainActivity : AppCompatActivity() {
             launch {
                 db.foodItemDao().getTotalCalories().collect {
                     totalCalories = it ?: 0
-                    totalCaloriesTextView.text = getString(R.string.calories, totalCalories)
+                    totalCaloriesTextView.text =
+                        getString(R.string.calories, totalCalories)
                 }
             }
             launch {
                 // TODO: Refactor to use daily total
                 db.waterIntakeEventDao().getTotalIntake().collect {
                     totalWaterIntake = it ?: 0
-                    totalWaterTextView.text = getString(R.string.water, totalWaterIntake)
+                    totalWaterTextView.text =
+                        getString(R.string.water, totalWaterIntake)
                 }
             }
         }
@@ -102,4 +115,6 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.replace(R.id.food_list_frame, fragment)
         fragmentTransaction.commit()
     }
+
+
 }

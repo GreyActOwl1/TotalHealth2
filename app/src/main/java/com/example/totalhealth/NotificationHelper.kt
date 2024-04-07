@@ -3,6 +3,7 @@ package com.example.totalhealth
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -15,10 +16,7 @@ class NotificationHelper(private val context: Context) {
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 
         with(NotificationManagerCompat.from(context)) {
-            if (ActivityCompat.checkSelfPermission(
-                    context, Manifest.permission.POST_NOTIFICATIONS
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
+            if (!isNotificationPermissionGranted(context)) {
                 // TODO: Consider calling ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
                 //   public void onRequestPermissionsResult
@@ -35,6 +33,23 @@ class NotificationHelper(private val context: Context) {
     companion object {
         const val NOTIFICATION_ID = 1
         const val CHANNEL_ID = "health_tracker_channel"
-    }
+        const val REQUEST_CODE_POST_NOTIFICATIONS_PERMISSION = 2001
 
+        fun isNotificationPermissionGranted(context: Context): Boolean {
+            return ActivityCompat.checkSelfPermission(
+                context, Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+        }
+
+        fun requestNotificationPermission(context: Context) {
+            Log.d("NotificationHelper", "Requesting notification permission")
+            ActivityCompat.requestPermissions(
+                context as MainActivity,
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                REQUEST_CODE_POST_NOTIFICATIONS_PERMISSION
+            )
+        }
+
+
+    }
 }

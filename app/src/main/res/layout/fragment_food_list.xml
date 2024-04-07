@@ -12,15 +12,26 @@
         android:layout_height="match_parent"
         tools:context=".FoodListFragment">
 
+        <!-- Toggle for Daily Logging Reminders -->
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_daily_reminder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/daily_reminder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="32dp"/>
+
         <!-- RecyclerView for Food Items -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_food_items"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/switch_daily_reminder"
             app:layout_constraintBottom_toTopOf="@id/add_entry_button_row"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/food_item" />
 
         <!-- Bottom Row LinearLayout for Buttons -->
