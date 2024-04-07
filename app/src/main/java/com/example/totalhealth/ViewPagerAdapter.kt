@@ -12,7 +12,7 @@ class ViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 //          TODO: Add additional fragments
             0 -> StatsFragment()
             1 -> FoodOverviewFragment()
-            else -> StatsFragment()
+            else -> WaterOverviewFragment()
         }
     }
 }
