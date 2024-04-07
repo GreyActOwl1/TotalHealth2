@@ -37,5 +37,7 @@
     </string>
     <string name="average_total_water_intake">Average per Entry: %1$d oz</string>
     <string name="average_daily_water_intake">Average per Day: %1$d oz</string>
+    <string name="channel_description">TODO</string>
+    <string name="channel_name">TODO</string>
 
 </resources>
