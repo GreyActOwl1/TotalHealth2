@@ -23,9 +23,10 @@ class MainActivity : AppCompatActivity() {
         setupUI()
         updateTotalsDisplays()
         setNavigationBar()
-
+        // TODO: Add Daily Notifications
         // TODO: Add graphs (Graph Fragment)
         // TODO: Refactor to view binding
+        // TODO: Add Nav Graph
         // TODO: Refactor addFoodItem to fragment
         // TODO: Refactor addWaterEntry to fragment
         // TODO:(OPTIONAL) Highlight entry on submit & return to main activity
