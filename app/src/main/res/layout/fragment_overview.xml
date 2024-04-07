@@ -2,76 +2,30 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame_layout_overview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/frame_layout_overview"
     tools:context=".OverviewFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/overview_constraint_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Min and Max Calories -->
-        <TextView
-            android:id="@+id/calories_min_max_textview"
-            android:layout_width="0dp"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/calories_min_max"
-            android:textSize="28sp"
+            android:background="#C5CAE9"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp"
-            tools:text="Calories: Min: 1500, Max 2500"/>
+            app:tabIconTint="@color/white" />
 
-        <!-- Average Calories -->
-        <TextView
-            android:id="@+id/average_calories_textview"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/average_calories"
-            android:textSize="32sp"
-            app:layout_constraintTop_toBottomOf="@id/calories_min_max_textview"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="Average Calories: 2000 kcal"/>
-
-        <!-- Min and Max Water Intake -->
-        <TextView
-            android:id="@+id/water_intake_min_max_textview"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/water_intake_min_max"
-            android:textSize="32sp"
-            app:layout_constraintTop_toBottomOf="@id/average_calories_textview"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="32dp"
-            tools:text="Water: Min 1.5oz, Max 3oz"/>
-
-        <!-- Daily Average Water Intake -->
-        <TextView
-            android:id="@+id/daily_average_water_intake_textview"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/average_total_water_intake"
-            android:textSize="32sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/average_water_intake_textview"
-            tools:text="Daily Average Water Intake: 2oz" />
-
-        <!-- Average Water Intake -->
-        <TextView
-            android:id="@+id/average_water_intake_textview"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/average_total_water_intake"
-            android:textSize="32sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/water_intake_min_max_textview"
-            tools:text="Average Water Intake: 2oz" />
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tabs" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

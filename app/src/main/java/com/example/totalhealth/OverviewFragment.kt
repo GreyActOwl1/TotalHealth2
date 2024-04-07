@@ -6,8 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.firstOrNull
@@ -21,115 +25,45 @@ import kotlinx.coroutines.withContext
  */
 
 class OverviewFragment : Fragment() {
-
-    private lateinit var caloriesMinMaxTextview: TextView
-    private lateinit var averageCaloriesTextview: TextView
-    private lateinit var averageWaterIntakeTextview: TextView
-    private lateinit var waterIntakeMinMaxTextview: TextView
-    private lateinit var dailyAverageWaterIntakeTextview: TextView
-
+    private  lateinit var viewPager: ViewPager2
+    private lateinit var  viewPagerAdapter: ViewPagerAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        //TODO: Refactor to use view binding
-        return inflater.inflate(
-            R.layout.fragment_overview, container, false
-        ).also { view ->
-            caloriesMinMaxTextview = view.findViewById<TextView>(
-                R.id
-                    .calories_min_max_textview
-            )
-            averageCaloriesTextview = view.findViewById<TextView>(
-                R.id
-                    .average_calories_textview
-            )
-            averageWaterIntakeTextview = view.findViewById<TextView>(
-                R.id
-                    .average_water_intake_textview
-            )
-            waterIntakeMinMaxTextview = view.findViewById<TextView>(
-                R.id
-                    .water_intake_min_max_textview
-            )
-            dailyAverageWaterIntakeTextview = view.findViewById<TextView>(
-                R.id.daily_average_water_intake_textview
-            )
-
-        }
-
+    ): View? {
+        return inflater.inflate(R.layout.fragment_overview, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fetchAndUpdateStats()
-    }
+         viewPager = view.findViewById(R.id.view_pager)
+        viewPagerAdapter = ViewPagerAdapter(this)
+        viewPager.adapter = viewPagerAdapter
 
-
-    private fun fetchAndUpdateStats() {
-        val db = (requireActivity().application as HealthApplication).db
-
-        // get water stats
-        lifecycleScope.launch {
-            val minWaterIntake = async {
-                db.waterIntakeEventDao()
-                    .getMinWaterIntake().firstOrNull() ?: 0
-            }.await()
-            val maxWaterIntake = async {
-                db.waterIntakeEventDao()
-                    .getMaxWaterIntake().firstOrNull() ?: 0
-            }.await()
-            val avgWaterIntake = async {
-                db.waterIntakeEventDao()
-                    .getTotalAverageWaterIntake().firstOrNull() ?: 0
-            }.await()
-            val dailyAvgWaterIntake = async {
-                db.waterIntakeEventDao()
-                    .getDailyAverageWaterIntake().firstOrNull() ?: 0
-            }.await()
-
-            //get food stats
-            val minCalories = async {
-                db.foodItemDao()
-                    .getMinCalories().firstOrNull() ?: 0
-            }.await()
-
-            val maxCalories = async {
-                db.foodItemDao()
-                    .getMaxCalories().firstOrNull() ?: 0
-            }.await()
-
-            val avgCalories = async {
-                db.foodItemDao()
-                    .getAverageCalories().firstOrNull() ?: 0
-            }.await()
-
-            //update display on main thread
-            withContext(Dispatchers.Main) {
-                waterIntakeMinMaxTextview.text = getString(
-                    R.string
-                        .water_intake_min_max, minWaterIntake, maxWaterIntake
-                )
-                averageWaterIntakeTextview.text = getString(
-                    R.string
-                        .average_total_water_intake, avgWaterIntake
-                )
-                dailyAverageWaterIntakeTextview.text = getString(
-                    R.string
-                        .average_daily_water_intake, dailyAvgWaterIntake
-                )
-                caloriesMinMaxTextview.text = getString(
-                    R.string
-                        .calories_min_max, minCalories, maxCalories
-                )
-                averageCaloriesTextview.text = getString(
-                    R.string.average_calories, avgCalories
-                )
+        val tabLayout: TabLayout = view.findViewById(R.id.tabs)
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            when (position) {
+                0 -> {
+                    tab.text = "Stats"
+                    tab.icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_leaderboard_24)
+                }
+                1 -> {
+                    tab.text = "Food"
+                    tab.icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_timeline_24)
+                }
+                2 -> {
+                    tab.text = "Water"
+                    tab.icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_timeline_24)
+                }
             }
-        }
+        }.attach()
 
-    }
+}
+
+
+
 
 
     companion object {

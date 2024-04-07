@@ -44,5 +44,7 @@
     <string name="average_total_water_intake">Average per Entry: %1$d oz</string>
     <string name="average_daily_water_intake">Average per Day: %1$d oz</string>
     <string name="daily_reminder">Daily Reminders?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
