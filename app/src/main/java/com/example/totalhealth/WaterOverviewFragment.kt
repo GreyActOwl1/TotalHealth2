@@ -1,59 +1,75 @@
 package com.example.totalhealth
 
+import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.ValueFormatter
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [WaterOverviewFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class WaterOverviewFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var chartWaterIntake: LineChart
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_water_overview, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment WaterOverviewFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            WaterOverviewFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        chartWaterIntake = view.findViewById(R.id.chart_water_intake)
+
+        // Mock data, replace with actual data fetching logic
+        val mockWaterIntakes = listOf(
+            WaterIntakeEvent(timestamp = LocalDateTime.now().minusDays(5), amount =  8),
+            WaterIntakeEvent(timestamp = LocalDateTime.now().minusDays(3), amount = 24),
+            WaterIntakeEvent(timestamp = LocalDateTime.now().minusDays(2), amount = 32),
+            WaterIntakeEvent(timestamp = LocalDateTime.now().minusDays(4), amount = 16),
+            WaterIntakeEvent(timestamp = LocalDateTime.now().minusDays(1), amount = 40),
+            WaterIntakeEvent(timestamp = LocalDateTime.now(), amount = 48)
+            // Add more records
+        )
+        showLineGraph(mockWaterIntakes)
+    }
+
+    private fun showLineGraph(waterIntakes: List<WaterIntakeEvent>) {
+        val entries = ArrayList<Entry>()
+
+        waterIntakes.forEachIndexed { index, record ->
+            // Convert LocalDateTime to a float or long value for the graph. Here we're just using the index.
+            entries.add(Entry(index.toFloat(), record.amount.toFloat()))
+        }
+
+        val dataSet = LineDataSet(entries, "Water Intake").apply {
+            color = Color.BLUE
+            valueTextColor = Color.BLACK
+        }
+
+        chartWaterIntake.data = LineData(dataSet)
+
+        // Formatting the X-axis to display the LocalDateTime as a readable date.
+        chartWaterIntake.xAxis.valueFormatter = object : ValueFormatter() {
+            private val dateFormatter = DateTimeFormatter.ofPattern("MM/dd")
+
+            override fun getFormattedValue(value: Float): String {
+                val index = value.toInt()
+                return dateFormatter.format(waterIntakes.getOrNull(index)?.timestamp ?: LocalDateTime.now())
             }
+        }
+        chartWaterIntake.xAxis.position = XAxis.XAxisPosition.BOTTOM
+        chartWaterIntake.xAxis.setDrawGridLines(false)
+        chartWaterIntake.xAxis.granularity = 1f // Show only one entry per day
+
+        chartWaterIntake.invalidate() // Refresh chart
     }
 }
