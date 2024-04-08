@@ -1,10 +1,10 @@
-# Android Project 5 - Total Health
+# Android Project 6 - Total Health
 
 Submitted by: Adrian Eastmond
 
 **Total Health** is a health metrics app that allows users to track their daily calories and hydration.
 
-Time spent: **8** hours spent in total
+Time spent: **9** hours spent in total
 
 ## Required Features
 
@@ -18,8 +18,8 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] **Add a more advanced UI (e.g: Graphing) for tracking trends in metrics**
-- [ ] **Implement daily notifications to prompt users to fill in their data**
+- [x] **Add a more advanced UI (e.g: Graphing) for tracking trends in metrics**
+- [x] **Implement daily notifications to prompt users to fill in their data**
 
 The following **additional** features are implemented:
 
@@ -27,14 +27,20 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://i.imgur.com/ptCWhOm.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://i.imgur.com/uZoRPtK.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 ### Previous Versions
 
 <details>
-<summary>1.0</summary>
+<summary>2.0</summary>
 <br>
 <img src='https://i.imgur.com/ptCWhOm.gif' title='v1.0 Video Walkthrough' width='' alt='v1.0 Video Walkthrough' />
+</details>
+
+<details>
+<summary>1.0</summary>
+<br>
+<img src='https://i.imgur.com/6UAxBiR.gif' title='v1.0 Video Walkthrough' width='' alt='v1.0 Video Walkthrough' />
 </details>
 
 <!-- ![Video Walkthrough](https://i.imgur.com/6UAxBiR.gif) -->
